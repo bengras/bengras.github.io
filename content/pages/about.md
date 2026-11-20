@@ -13,7 +13,6 @@ Some links to other resources of mine:
 [Github](https://github.com/bengras)
 [LinkedIn](https://www.linkedin.com/in/bengras)
 [Twitter](https://twitter.com/bjg)
-[Ohloh](https://www.ohloh.net/accounts/beng)
 
 A pic:
 
