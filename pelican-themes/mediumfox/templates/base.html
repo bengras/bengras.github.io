@@ -53,6 +53,20 @@
             <a href="/"><h4>Home</h4></a>
           </div>
 
+          {% for p in pages %}
+          <div class="col-md-1">
+            <a href="{{ SITEURL }}/{{ p.url }}"><h4>{{ p.title }}</h4></a>
+          </div>
+          {% endfor %}
+
+          <div class="col-md-1">
+            <a href="{{ SITEURL }}/archives.html"><h4>Archives</h4></a>
+          </div>
+
+          <div class="col-md-1">
+            <a href="{{ SITEURL }}/tags.html"><h4>Tags</h4></a>
+          </div>
+
           <div class="col-md-2">
             <div class="social-icon-list">
               {% if AUTHOR_TWITTER %}

@@ -1,4 +1,5 @@
-Title: About this site
+Title: About
+Slug: about-this-site
 Date: 2014-10-04 2:36
 Summary: Site info
 
@@ -16,4 +17,4 @@ Some links to other resources of mine:
 
 A pic:
 
-![My profile pic]({filename}/images/profile.jpg)
+![My profile pic]({static}/images/profile.jpg)

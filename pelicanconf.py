@@ -12,5 +12,16 @@ TIMEZONE = 'CET'
 DELETE_OUTPUT_DIRECTORY = True
 FEED_ATOM = 'atom.xml'
 FEED_RSS = 'rss.xml'
-TWITTER_USERNAME = 'bjg'
-STATIC_PATHS = [ 'images' , 'files' ]
+AUTHOR_TWITTER = 'bjg'
+AUTHOR_GITHUB = 'bengras'
+AUTHOR_LINKEDIN = 'bengras'
+
+STATIC_PATHS = [ 'images' , 'files' , 'extra/favicon.png' ]
+EXTRA_PATH_METADATA = { 'extra/favicon.png': { 'path': 'favicon.png' } }
+
+# Single author and single category make these index pages redundant.
+DIRECT_TEMPLATES = ['index', 'archives', 'tags']
+AUTHOR_SAVE_AS = ''
+AUTHORS_SAVE_AS = ''
+CATEGORY_SAVE_AS = ''
+CATEGORIES_SAVE_AS = ''
