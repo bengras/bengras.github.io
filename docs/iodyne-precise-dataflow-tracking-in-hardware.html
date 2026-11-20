@@ -18,7 +18,7 @@
     <link
         href="https://www.shrike-systems.com/feeds/all.atom.xml"
         type="application/atom+xml" rel="alternate" title="Shrike Systems Atom Feed" />
-<meta name="description" content="My Intel Security Practices Blog post on IODyne, a differential dataflow-tracking technique for pre-silicon hardware security verification, is up." />
+<meta name="description" content="My Intel Blog post on IODyne, RTL dataflow tracking." />
 </head>
 
 <body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
@@ -99,7 +99,6 @@
       <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
         <time>October 16, 2025</time>
         <div>
-          <span>&nbsp;·&nbsp;1 min read</span>
         </div>
         <div>
           <span>&nbsp;·&nbsp;Ben Gras</span>
@@ -124,25 +123,17 @@
               prose-img:rounded-md
               sm:text-left md:text-justify
               ">
-    <p>I wrote about IODyne on the <a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html">Intel Security Practices
-Blog</a>:
-a differential dataflow-tracking technique for pre-silicon hardware
+    <p>At Intel I have been working on a method for tracking dataflow
+in RTL simulations to e.g. track stale date. The project is called
+IODyne (named after iodine, the contrast fluid). I wrote about IODyne on the <a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html">Intel Security Practices
+Blog</a>.
+It is a a differential dataflow-tracking technique for pre-silicon hardware
 security verification.</p>
-<p>The question IODyne answers sounds simple: given a value in any
+<p>The question IODyne answers: given a value in any
 hardware buffer, where does it go, and which other values does it
-influence? Answering it precisely is how you catch data leaking across
-security boundaries &mdash; the class of problem behind vulnerabilities like
-Meltdown and MFBDS &mdash; before the design ever reaches silicon.</p>
-<p>IODyne does this with differential analysis: simulate the design with
-a baseline, simulate again with the tracked value modified, and diff
-the results. Only true dependencies show up, which eliminates the
-false positives that plague the traditional X-injection approach. When
-it does flag an issue, it automatically minimizes the test case down
-to the single injection needed to reproduce it.</p>
-<p>The post walks through the technique from first principles with a
-small Verilog example, then shows how it applies to real CPU
-vulnerability classes. <a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html">Read it
-here</a>.</p>
+influence?  IODyne does this with differential analysis. First
+we simulate the design with a baseline. Then we simulate again with the tracked value modified, and diff
+the results. See the post for full details.</p>
 <p><em>Update, October 2026:</em> the patent on this technique was granted on
 October 20, 2026 &mdash; <a href="https://patentsgazette.uspto.gov/week42/OG/html/1551-3/US12769913-20261020.html">US Patent 12,769,913, "Detecting potential
 security issues in a hardware design using register transfer level

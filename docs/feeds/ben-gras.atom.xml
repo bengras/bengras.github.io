@@ -1,42 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shrike Systems - Ben Gras</title><link href="https://www.shrike-systems.com/" rel="alternate"/><link href="https://www.shrike-systems.com/feeds/ben-gras.atom.xml" rel="self"/><id>https://www.shrike-systems.com/</id><updated>2026-10-15T12:00:00+02:00</updated><entry><title>The Fuzzer at the Coffee Machine</title><link href="https://www.shrike-systems.com/the-fuzzer-at-the-coffee-machine.html" rel="alternate"/><published>2026-10-15T12:00:00+02:00</published><updated>2026-10-15T12:00:00+02:00</updated><author><name>Ben Gras</name></author><id>tag:www.shrike-systems.com,2026-10-15:/the-fuzzer-at-the-coffee-machine.html</id><summary type="html">&lt;p&gt;Our Intel Security Practices Blog post on fuzzing embedded firmware in simulation-based SoC environments, told as a story.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Together with Eric Alata, Beno&amp;icirc;t Morgan, and Neer Roggel I wrote about
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shrike Systems - Ben Gras</title><link href="https://www.shrike-systems.com/" rel="alternate"/><link href="https://www.shrike-systems.com/feeds/ben-gras.atom.xml" rel="self"/><id>https://www.shrike-systems.com/</id><updated>2026-10-15T12:00:00+02:00</updated><entry><title>The Fuzzer at the Coffee Machine</title><link href="https://www.shrike-systems.com/the-fuzzer-at-the-coffee-machine.html" rel="alternate"/><published>2026-10-15T12:00:00+02:00</published><updated>2026-10-15T12:00:00+02:00</updated><author><name>Ben Gras</name></author><id>tag:www.shrike-systems.com,2026-10-15:/the-fuzzer-at-the-coffee-machine.html</id><summary type="html">&lt;p&gt;Our Intel Security Practices Blog post on fuzzing embedded firmware in simulation-based SoC environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Together with Eric Alata, Beno&amp;icirc;t Morgan, and Neer Roggel I wrote about
 how we fuzz embedded firmware, on the &lt;a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/the-fuzzer-at-the-coffee-machine.html"&gt;Intel Security Practices
-Blog&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The fuzzer runs firmware in a simulator, which gives us parallel
-sessions and trace-level visibility that bare metal can't. Taint
-tracking identifies which input bits actually influence execution, and
-we use that to generate seeds that exercise meaningful firmware
-behavior from the start. Crash-trace analysis tooling then connects a
-failing input back to what happened inside the firmware &amp;mdash; important in
-multi-unit SoC environments, where failures show up as hangs,
-livelocks, or bad states spread across components rather than a clean
-stack trace.&lt;/p&gt;
-&lt;p&gt;Rather than a conventional technical report, we told it as a story: a
-week of conversations at the office coffee machine between a security
-lead, a developer, and a product manager who needs a minimum viable
-setup, not a six-month program. The format fits, because that is how
-the project actually took shape &amp;mdash; through discussions, constraints,
-and iteration.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/the-fuzzer-at-the-coffee-machine.html"&gt;Read it
-here&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"/><category term="intel"/><category term="fuzzing"/><category term="firmware"/></entry><entry><title>IODyne: precise dataflow tracking in hardware</title><link href="https://www.shrike-systems.com/iodyne-precise-dataflow-tracking-in-hardware.html" rel="alternate"/><published>2025-10-16T12:00:00+02:00</published><updated>2025-10-16T12:00:00+02:00</updated><author><name>Ben Gras</name></author><id>tag:www.shrike-systems.com,2025-10-16:/iodyne-precise-dataflow-tracking-in-hardware.html</id><summary type="html">&lt;p&gt;My Intel Security Practices Blog post on IODyne, a differential dataflow-tracking technique for pre-silicon hardware security verification, is up.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I wrote about IODyne on the &lt;a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html"&gt;Intel Security Practices
-Blog&lt;/a&gt;:
-a differential dataflow-tracking technique for pre-silicon hardware
+Blog&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"/><category term="intel"/><category term="fuzzing"/><category term="firmware"/></entry><entry><title>IODyne: precise dataflow tracking in hardware</title><link href="https://www.shrike-systems.com/iodyne-precise-dataflow-tracking-in-hardware.html" rel="alternate"/><published>2025-10-16T12:00:00+02:00</published><updated>2025-10-16T12:00:00+02:00</updated><author><name>Ben Gras</name></author><id>tag:www.shrike-systems.com,2025-10-16:/iodyne-precise-dataflow-tracking-in-hardware.html</id><summary type="html">&lt;p&gt;My Intel Blog post on IODyne, RTL dataflow tracking.&lt;/p&gt;</summary><content type="html">&lt;p&gt;At Intel I have been working on a method for tracking dataflow
+in RTL simulations to e.g. track stale date. The project is called
+IODyne (named after iodine, the contrast fluid). I wrote about IODyne on the &lt;a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html"&gt;Intel Security Practices
+Blog&lt;/a&gt;.
+It is a a differential dataflow-tracking technique for pre-silicon hardware
 security verification.&lt;/p&gt;
-&lt;p&gt;The question IODyne answers sounds simple: given a value in any
+&lt;p&gt;The question IODyne answers: given a value in any
 hardware buffer, where does it go, and which other values does it
-influence? Answering it precisely is how you catch data leaking across
-security boundaries &amp;mdash; the class of problem behind vulnerabilities like
-Meltdown and MFBDS &amp;mdash; before the design ever reaches silicon.&lt;/p&gt;
-&lt;p&gt;IODyne does this with differential analysis: simulate the design with
-a baseline, simulate again with the tracked value modified, and diff
-the results. Only true dependencies show up, which eliminates the
-false positives that plague the traditional X-injection approach. When
-it does flag an issue, it automatically minimizes the test case down
-to the single injection needed to reproduce it.&lt;/p&gt;
-&lt;p&gt;The post walks through the technique from first principles with a
-small Verilog example, then shows how it applies to real CPU
-vulnerability classes. &lt;a href="https://www.intel.com/content/www/us/en/security/security-practices/blogs/improving-hardware-security-verification-iodyne.html"&gt;Read it
-here&lt;/a&gt;.&lt;/p&gt;
+influence?  IODyne does this with differential analysis. First
+we simulate the design with a baseline. Then we simulate again with the tracked value modified, and diff
+the results. See the post for full details.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Update, October 2026:&lt;/em&gt; the patent on this technique was granted on
 October 20, 2026 &amp;mdash; &lt;a href="https://patentsgazette.uspto.gov/week42/OG/html/1551-3/US12769913-20261020.html"&gt;US Patent 12,769,913, "Detecting potential
 security issues in a hardware design using register transfer level
