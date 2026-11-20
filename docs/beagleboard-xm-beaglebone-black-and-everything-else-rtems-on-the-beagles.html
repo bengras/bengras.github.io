@@ -1,57 +1,148 @@
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Beagleboard xM, Beaglebone black and everything else RTEMS on the Beagles</title>
-  <meta name="author" content="Ben Gras">
-
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="description" content="Beagleboard xM, Beaglebone black and everything else RTEMS on the Beagles written July 22, 2014 in beagle,beaglebone,beagleboard,rtems">
-
-  <link rel="canonical" href="https://www.shrike-systems.com/beagleboard-xm-beaglebone-black-and-everything-else-rtems-on-the-beagles.html">
-
-  <link href="https://www.shrike-systems.com/favicon.png" rel="icon">
-
-  <link href="https://www.shrike-systems.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shrike Systems Full Atom Feed" />
-
-  <link href="https://www.shrike-systems.com/theme/css/screen.css"  media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="https://www.shrike-systems.com/theme/css/tomorrow.css"  media="screen, projection" rel="stylesheet" type="text/css" />
-
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="Shrike Systems Blog Posts">
+    <title>Beagleboard xM, Beaglebone black and everything else RTEMS on the Beagles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://www.shrike-systems.com/theme/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.shrike-systems.com/theme/css/pygment.css" />
+    <link rel="shortcut icon" href="https://www.shrike-systems.com/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://www.shrike-systems.com/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
+        href="https://www.shrike-systems.com/theme/css/stork-dark.css">
+    <link
+        href="https://www.shrike-systems.com/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Shrike Systems Atom Feed" />
+<meta name="description" content="How to get everything RTEMS running on everything Beagle from scratch." />
 </head>
-  <body>
-    <a href="/" class="home-icon">
-      <img src="https://www.shrike-systems.com/theme/images/home.png"/>
-    </a>
-<article role="article" class="full-single-article">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <h1>Beagleboard xM, Beaglebone black and everything else RTEMS on the Beagles</h1>
-        <div class="meta">
-          written <time datetime="2014-07-22T09:15:00+02:00">July 22, 2014</time>
-          in <span class="categories">
-            <a href="https://www.shrike-systems.com/tag/beagle.html">beagle</a>,            <a href="https://www.shrike-systems.com/tag/beaglebone.html">beaglebone</a>,            <a href="https://www.shrike-systems.com/tag/beagleboard.html">beagleboard</a>,            <a href="https://www.shrike-systems.com/tag/rtems.html">rtems</a>          </span>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://www.shrike-systems.com/">Shrike Systems</a></h1>
+            <button id="theme-toggle" type="button" aria-label="Light|Dark"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
         </div>
-        <h1>Everything about RTEMS on Beagleboards &amp; Beaglebones</h1>
-<p><img alt="Beagleboard" src="https://www.shrike-systems.com/images/beagle.jpg"></p>
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/pages/about-this-site.html">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a                     href="https://www.shrike-systems.com/categories.html">Categories</a></li>
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/category/blog.html">Blog</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">Beagleboard xM, Beaglebone black and everything else RTEMS on the Beagles</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>July 22, 2014</time>
+        <div>
+          <span>&nbsp;·&nbsp;18 min read</span>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Ben Gras</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <details class="flex flex-col my-6 p-4 bg-zinc-200 dark:bg-zinc-800 rounded-lg">
+    <summary class="text-lg font-bold">Table of contents</summary>
+    <div class="mx-4 px-4 underline">
+      <div id="toc"><ul><li><a class="toc-href" href="#everything-about-rtems-on-beagleboards-beaglebones" title="Everything about RTEMS on Beagleboards &amp; Beaglebones">Everything about RTEMS on Beagleboards &amp; Beaglebones</a><ul><li><a class="toc-href" href="#purpose-of-this-post" title="Purpose of this post">Purpose of this post</a></li><li><a class="toc-href" href="#introduction" title="Introduction">Introduction</a></li><li><a class="toc-href" href="#requirements" title="Requirements">Requirements</a></li><li><a class="toc-href" href="#acknowledgements" title="Acknowledgements">Acknowledgements</a></li><li><a class="toc-href" href="#about-where-the-code-is" title="About Where the Code Is">About Where the Code Is</a></li><li><a class="toc-href" href="#first-build-the-toolchain-uboot-qemu-and-supporting-utilities" title="First: build the toolchain, uboot, qemu and supporting utilities">First: build the toolchain, uboot, qemu and supporting utilities</a></li><li><a class="toc-href" href="#next-build-rtems-beagle-bsps-and-test-suite" title="Next: build RTEMS, Beagle BSPs and test suite">Next: build RTEMS, Beagle BSPs and test suite</a></li><li><a class="toc-href" href="#aside-how-to-run-an-elf-rtems-image-on-a-beagle" title="Aside - How to run an ELF RTEMS image on a Beagle">Aside - How to run an ELF RTEMS image on a Beagle</a></li><li><a class="toc-href" href="#run-the-test-suite" title="Run the test suite">Run the test suite</a></li><li><a class="toc-href" href="#writing-an-sd-card-image-for-the-beaglebone-black" title="Writing an SD card image for the Beaglebone Black">Writing an SD card image for the Beaglebone Black</a></li><li><a class="toc-href" href="#running-with-the-beagleboard-xm-over-jtag" title="Running with the Beagleboard xM over JTAG">Running with the Beagleboard xM over JTAG</a></li><li><a class="toc-href" href="#running-the-full-test-suite-over-jtag" title="Running the full test suite over JTAG">Running the full test suite over JTAG</a></li><li><a class="toc-href" href="#what-ive-tested" tested'="" title="What I" ve="">What I've Tested</a></li><li><a class="toc-href" href="#whats-next" next'="" s="" title="What">What's next</a></li></ul></li></ul></div>
+    </div>
+  </details>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-slate-600 prose-a:font-normal
+              dark:prose-a:text-slate-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              sm:text-left md:text-justify
+              ">
+    <h1 id="everything-about-rtems-on-beagleboards-beaglebones">Everything about RTEMS on Beagleboards &amp; Beaglebones</h1>
+<p><img alt="Beagleboard" src="https://www.shrike-systems.com/images/beagle.jpg"/></p>
 <p>Welcome to the 10th post!</p>
 <p>(Updated fri sep 25 2015 with 'requirements' section, especially for the console cable warning. you need a seperate cable for the BBB console on rtems. Shortly after: 64bit ubuntu vs 32bit ubuntu.)</p>
 <p>(Updated sun dec 27 2015 with changes to make RTEMS 4.12 work.)</p>
-<h2>Purpose of this post</h2>
+<h2 id="purpose-of-this-post">Purpose of this post</h2>
 <p>Don't have anything RTEMS installed on your machine but want to get it running on the Beaglebone? Or curious about how it runs, but don't have the hardware and want to run it in an emulator? Read on.</p>
 <p>Who am I kidding. Everyone wants that!</p>
 <p>This post will show you in detail how to get RTEMS applications running from scratch on the BeagleBoard xM, Beaglebone and Beaglebone Black. Actually it should work on the original BeagleBoard too but I don't have that hardware to test it.</p>
-<h2>Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 <p>As faithful readers know, I am working on RTEMS support for the Beagleboard, Beaglebone and Beaglebone Black. There has been quite some interest in Beagle support for RTEMS on the RTEMS mailing lists recently, quite suddenly I thought. That made me decide to offer the current state of the BSP for merging with RTEMS mainline. The alternative is to keep polishing it and improving support out-of-tree. But that is better done from RTEMS mainline now.</p>
 <p>So as mentioned, the purpose of this post is to start from nothing RTEMS-specific and build everything needed to run an RTEMS app on your Beagle target. As you'll see it isn't labour-intensive.</p>
-<h2>Requirements</h2>
+<h2 id="requirements">Requirements</h2>
 <ul>
 <li>Target Hardware: Beagleboard XM, Beaglebone white, or beaglebone black. Original Beagleboard (plain)  and beaglebone green should also work but I haven't personally tested that. If you don't have any hardware, you can also run the beagleboard xm in an emulator which will be built for you automatically in this procedure.</li>
 <li>Peripherals: a way to power the target (sometimes USB will do); a micro-sd card to boot from (beaglebones)</li>
@@ -64,14 +155,14 @@
 <li>Operating system: it shouldn't matter THAT much, but unfortunately it does. I've tested this on 64-bit Ubuntu. 32-bit Ubuntu has a reported problem (thank you Claudio Scordino) that was solved by building in 64-bit. Other OSes (FreeBSD etc) should work too but have minor build problems I hope to be able to fix in the future.</li>
 <li>pax is needed</li>
 </ul>
-<h2>Acknowledgements</h2>
+<h2 id="acknowledgements">Acknowledgements</h2>
 <p>Chris Johns helped guide the polishing of the BSP a lot when I first came
 up with it (he didn't call it Ben and Chris's Big Beagleboard Adventure for
 nothing!). Brandon Matthews asked a question about running RTEMS on the
 Beaglebone once and has since been very patient and helpful in collaborating
 to move the process along. Claas Ziemke
 started the, as-yet unmerged, original Beagleboard BSP for GSoC in 2012.</p>
-<h2>About Where the Code Is</h2>
+<h2 id="about-where-the-code-is">About Where the Code Is</h2>
 <p>There are 3 repo's to be concerned with:</p>
 <ul>
 <li>The RTEMS Source builder, or RSB, which builds a bunch of tools and dependencies to build RTEMS itself</li>
@@ -83,20 +174,19 @@ started the, as-yet unmerged, original Beagleboard BSP for GSoC in 2012.</p>
 repositories. If and when they are, I will update this post to
 reflect the official locations.</p>
 <p>Currently the BSP is mainlined, but the RSB and rtems-tools parts are not.</p>
-<h2>First: build the toolchain, uboot, qemu and supporting utilities</h2>
+<h2 id="first-build-the-toolchain-uboot-qemu-and-supporting-utilities">First: build the toolchain, uboot, qemu and supporting utilities</h2>
 <p>The toolchain is needed to actually compile code to run on the Beagles. Fortunately the <a href="http://www.rtems.org/wiki/index.php/RTEMS_Source_Builder">RTEMS Source Builder</a> provides a way to do this in an automated, repeatable fashion. Also called the RSB. I have added some packages to the RSB to facilitate testing and preparing an SD card image to boot and run on Beagle targets.</p>
 <p>This is combined in the bset 'beagle' and is all built with the following simple commands. We start by creating the directory all the RTEMS-specific stuff wil happen in, both binaries and sources. I am choosing $HOME/development/rtems/.</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% mkdir -p development/rtems/sources</span>
 <span class="w">    </span><span class="c">% cd development/rtems/sources</span>
 </code></pre></div>
-
 <p>The RSB has bsets you can choose from which are a set of tools with all needed dependencies. There is a toolchain bset for instance. I added a beagle bset which contains the toolchain and all other utilities and software we need.</p>
 <p>Check you have the dependencies the RSB itself depends on. Go to the
 <a href="http://www.rtems.org/ftp/pub/rtems/people/chrisj/source-builder/source-builder.html#_host_setups">RTEMS Source Builder Host Setups</a> section and look for your OS.
 I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box otherwise.</p>
 <p>Now fetch the RSB.</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% git clone -b beagle https://github.com/bengras/rtems-source-builder.git</span>
-<span class="w">    </span><span class="n">Cloning</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="s">&#39;rtems-source-builder&#39;</span><span class="k">...</span>
+<span class="w">    </span><span class="n">Cloning</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="s">'rtems-source-builder'</span><span class="k">...</span>
 <span class="w">    </span><span class="n">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Reusing</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="nb">pack</span><span class="p">:</span><span class="w"> </span><span class="mi">3999</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="w">    </span><span class="n">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Counting</span><span class="w"> </span><span class="n">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="w">    </span><span class="n">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Compressing</span><span class="w"> </span><span class="n">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="c">% (15/15), done.</span>
@@ -104,20 +194,17 @@ I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box ot
 <span class="w">    </span><span class="n">Receiving</span><span class="w"> </span><span class="n">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="c">% (4015/4015), 2.96 MiB | 1.13 MiB/s, done.</span>
 <span class="w">    </span><span class="n">Resolving</span><span class="w"> </span><span class="n">deltas</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="c">% (2361/2361), done.</span>
 </code></pre></div>
-
 <p>First verify the basic dependencies are on the system.</p>
 <div class="highlight"><pre><span></span><code><span class="c">% ./rtems-source-builder/source-builder/sb-check </span>
 <span class="n">RTEMS</span><span class="w"> </span><span class="s">Source</span><span class="w"> </span><span class="s">Builder</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Check</span><span class="p">,</span><span class="w"> </span><span class="n">v0</span><span class="p">.</span><span class="mf">3.0</span>
 <span class="n">Environment</span><span class="w"> </span><span class="s">is</span><span class="w"> </span><span class="s">ok</span>
 </code></pre></div>
-
 <p>Then build the beagle bset. We tell RSB to install the binaries under the $HOME/development/rtems/4.12 prefix.</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% cd rtems-source-builder/rtems</span>
 <span class="w">    </span><span class="c">% ../source-builder/sb-set-builder --log=beagle.txt --prefix=$HOME/development/rtems/4.12 devel/beagle.bset</span>
 </code></pre></div>
-
 <p>Ok, great. This will have built the toolchain with the right target, qemu, uboot, and some supporting utilities needed to prepare the SD card. They are all under $HOME/development/rtems/4.12. We will use these soon enough.</p>
-<h2>Next: build RTEMS, Beagle BSPs and test suite</h2>
+<h2 id="next-build-rtems-beagle-bsps-and-test-suite">Next: build RTEMS, Beagle BSPs and test suite</h2>
 <p>Time for the main act - the RTEMS code itself. We enable the Beagle BSP, build all the RTEMS code. </p>
 <p>At configure time, we can specify any set of four Beagle sub-BSPs: beagleboard, beagleboardxm, beaglebonewhite and beagleboneblack. beaglebonewhite is the original beaglebone but it's sometimes called white to dis-ambiguate it. In the BSP code there are only two cases but hardware-specific changes might change that in the future; so we have 4 cases now so the usage needn't change.</p>
 <p>OK let's build the beagleboardxm and beagleboneblack BSPs!</p>
@@ -125,7 +212,6 @@ I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box ot
 <div class="highlight"><pre><span></span><code><span class="o">%</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="o">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">rtems</span>
 <span class="o">%</span><span class="w"> </span><span class="k">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=$</span><span class="n">HOME</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">rtems</span><span class="o">/</span><span class="mf">4.12</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="o">$</span><span class="n">PATH</span>
 </code></pre></div>
-
 <p>Now fetch the code (update nov 3rd: BSP is mainlined):</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% git clone git://git.rtems.org/rtems rtems-src</span>
 <span class="n">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Counting</span><span class="w"> </span><span class="n">objects</span><span class="p">:</span><span class="w"> </span><span class="mi">460971</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
@@ -136,40 +222,35 @@ I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box ot
 <span class="n">Checking</span><span class="w"> </span><span class="s">connectivity...</span><span class="w"> </span><span class="s">done.</span>
 <span class="w">    </span><span class="c">% cd rtems-src</span>
 </code></pre></div>
-
 <p>The bootstrap step to generate the configure files:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% ./bootstrap; ./bootstrap -p</span>
 <span class="w">    </span><span class="c">% cd ..</span>
 </code></pre></div>
-
 <p>Configure everything, selecting the beagleboneblack and the beagleboardxm modes. We also tell it to build the full test suite (--enable-tests) and for this reason we make the console operate in polled mode, a requirement for the tests to be run. On this BSP that is accomplished by setting CONSOLE_POLLED=1 at configure time. The default is interrupt-driven mode.</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% mkdir b-beagle ; cd b-beagle</span>
-<span class="w">    </span><span class="c">% CONSOLE_POLLED=1 ../rtems-src/configure --target=arm-rtems4.12 --enable-rtemsbsp=&quot;beagleboneblack beagleboardxm&quot; --enable-tests</span>
+<span class="w">    </span><span class="c">% CONSOLE_POLLED=1 ../rtems-src/configure --target=arm-rtems4.12 --enable-rtemsbsp="beagleboneblack beagleboardxm" --enable-tests</span>
 <span class="w">    </span><span class="c">% make</span>
 </code></pre></div>
-
 <p>If all went according to plan, you have a bunch of .exe files in the $HOME/development/rtems/b-beagle/arm-rtems4.12/c hierarchy. The full set twice - once linked with the beagleboardxm BSP, and once with the beagleboneblack BSP.</p>
-<h2>Aside - How to run an ELF RTEMS image on a Beagle</h2>
+<h2 id="aside-how-to-run-an-elf-rtems-image-on-a-beagle">Aside - How to run an ELF RTEMS image on a Beagle</h2>
 <p>Something that isn't actually so obvious. We have an ELF-formatted .exe file now. How will that be loaded and executed on our targets? That is highly target-specific, and out of scope for RTEMS itself. Somehow the hardware has to be initialized. The file has to be loaded into memory in the right place and with the right initialization. Then the cpu has to be sent there. All this is not done by RTEMS itself, it can't. Usually we rely on a bootloader to do this.</p>
 <p>There are many options, but to get started, this page shows you how to write an SD card with an RTEMS image and a boot loader on it, completely self-contained.</p>
 <p>Other options are netbooting (so you don't have to write an SD card every time you want to boot something else) or loading with JTAG (no SD card or bootloader needed at all).</p>
 <p>We need uboot and several other tools to prepare a partitioned  SD card with a filesystem on it.</p>
 <p>It would be a chore to make the user re-invent this all the time, so we rely on a script that is in the RTEMS tree already.</p>
-<h2>Run the test suite</h2>
+<h2 id="run-the-test-suite">Run the test suite</h2>
 <p>To track whether all code actually performs as expected with this BSP, we can automatically run all the RTEMS tests. Every piece of test code is linked with this BSP and executed. These are currently 501 tests. Each one is considered a success (passed) if it displays the start and end banner as its output. </p>
 <p>It is a great correctness baseline to establish, as future regressions (whether caused by changes in the BSP itself or not) can then be automatically caught. We simulate this execution so the target hardware isn't required to run the test set.</p>
 <p>First we fetch RTEMS tools, containing the testing code:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="o">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">rtems</span>
 <span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="n">bbxm</span><span class="o">-</span><span class="n">wip</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bengras</span><span class="o">/</span><span class="n">rtems</span><span class="o">-</span><span class="n">tools</span><span class="o">.</span><span class="n">git</span><span class="w"> </span><span class="n">rtems</span><span class="o">-</span><span class="n">tools</span>
 </code></pre></div>
-
 <p>Earlier, the RTEMS source builder has fetched and built a lot of required tools to actually run a test. There is a script in the RTEMS tester tree that takes an RTEMS executable, processes it into an image that uboot will load (using objdump and mkimage), put it together with MLO and uboot on a filesystem, and write an SD card image with it.</p>
 <p>We can then simulate its execution with the Linaro fork of qemu, which emulates a beagleboard xM in software.</p>
 <p>This is invoked automatically for every test executable by the RTEMS beagleboardxm_qemu tester. Here we go:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">rtems</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">tester</span>
 <span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="o">./</span><span class="n">rtems</span><span class="o">-</span><span class="n">test</span><span class="w"> </span><span class="o">--</span><span class="nb">log</span><span class="o">=</span><span class="n">bbxm</span><span class="o">.</span><span class="n">log</span><span class="w"> </span><span class="o">--</span><span class="n">report</span><span class="o">-</span><span class="n">mode</span><span class="o">=</span><span class="n">all</span><span class="w"> </span><span class="o">--</span><span class="n">rtems</span><span class="o">-</span><span class="n">bsp</span><span class="o">=</span><span class="n">beagleboardxm_qemu</span><span class="w"> </span><span class="o">--</span><span class="n">rtems</span><span class="o">-</span><span class="n">tools</span><span class="o">=$</span><span class="n">HOME</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">rtems</span><span class="o">/</span><span class="mf">4.12</span><span class="w"> </span><span class="o">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">rtems</span><span class="o">/</span><span class="n">b</span><span class="o">-</span><span class="n">beagle</span><span class="o">/</span><span class="n">arm</span><span class="o">-</span><span class="n">rtems4</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">beagleboardxm</span>
 </code></pre></div>
-
 <p>This will (on my machine) run for 30 minutes, executing all the tests, with parallelism even, a very nice system. The output in my case:</p>
 <div class="highlight"><pre><span></span><code>    Passed:   497
     Failed:     3
@@ -179,22 +260,18 @@ I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box ot
     Average test time: 0:00:03.534494
     Testing time     : 0:29:30.781935
 </code></pre></div>
-
 <p>So there are a few tests I should still diagnose before the baseline is as clean as it should be. But a pretty good start I'd say!</p>
-<h2>Writing an SD card image for the Beaglebone Black</h2>
+<h2 id="writing-an-sd-card-image-for-the-beaglebone-black">Writing an SD card image for the Beaglebone Black</h2>
 <p>In the RTEMS source tree itself there is a similar script to the above that lets you write an SD card image with a specific RTEMS executable on it. Let's write one for the Beaglebone Black:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% cd $HOME/development/rtems/rtems-src/c/src/lib/libbsp/arm/beagle/simscripts</span>
 <span class="w">    </span><span class="c">% sh sdcard.sh $HOME/development/rtems/4.12 $HOME/development/rtems/b-beagle/arm-rtems4.12/c/beagleboneblack/testsuites/samples/hello/hello.exe</span>
 </code></pre></div>
-
 <p>The script should give you a whole bunch of output, ending in:</p>
 <div class="highlight"><pre><span></span><code>    Result is in bone_hello.exe-sdcard.img.
 </code></pre></div>
-
 <p>There you go. dd that to an SD card .. (/dev/mmcblk0 in my case. careful!)</p>
 <div class="highlight"><pre><span></span><code><span class="gh">#</span> dd if=bone_hello.exe-sdcard.img of=/dev/mmcblk0 bs=4096
 </code></pre></div>
-
 <p>.. and boot!</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1"># picocom -b 115200 /dev/ttyUSB0</span>
 <span class="w">    </span><span class="n">U</span><span class="o">-</span><span class="n">Boot</span><span class="w"> </span><span class="n">SPL</span><span class="w"> </span><span class="mf">2014.04</span><span class="o">-</span><span class="mi">00015</span><span class="o">-</span><span class="n">gb4422bd</span><span class="w"> </span><span class="p">(</span><span class="n">Apr</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="mi">2014</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">13</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">29</span><span class="p">)</span>
@@ -246,17 +323,15 @@ I've tested this on Ubuntu and FreeBSD and it doesn't quite go out-of-the-box ot
 <span class="w">    </span><span class="n">Hello</span><span class="w"> </span><span class="n">World</span>
 <span class="w">    </span><span class="o">***</span><span class="w"> </span><span class="n">END</span><span class="w"> </span><span class="n">OF</span><span class="w"> </span><span class="n">TEST</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="n">WORLD</span><span class="w"> </span><span class="o">***</span>
 </code></pre></div>
-
 <p>The script needs to know whether it's for a Beagleboard xM or one of the
 Beaglebones. This is to know which uboot to use. It will detect this from the
 path the executable is in, so you have to specify the full path.</p>
-<h2>Running with the Beagleboard xM over JTAG</h2>
+<h2 id="running-with-the-beagleboard-xm-over-jtag">Running with the Beagleboard xM over JTAG</h2>
 <p>This is a slightly more advanced use. Connect a flyswatter or flyswatter2 to a Beagleboard xM and you can load and run RTEMS executables on it without any other dependencies - Beagle from scratch. No bootloader, nothing. You will need openocd for this.</p>
 <p>Still from the simscripts dir, first start openocd. I have a flywatter but you can also specify a flyswatter2.cfg:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c">% cd $HOME/development/rtems/rtems-src/c/src/lib/libbsp/arm/beagle/simscripts</span>
-<span class="w">    </span><span class="c">% openocd -f interface/ftdi/flyswatter.cfg -f bbxm.cfg -c&#39;reset init&#39;</span>
+<span class="w">    </span><span class="c">% openocd -f interface/ftdi/flyswatter.cfg -f bbxm.cfg -c'reset init'</span>
 </code></pre></div>
-
 <p>openocd should now be talking to your bbxm and be offering a gdb interface. Using gdb we can load and run RTEMS executables.</p>
 <p>Try it:</p>
 <div class="highlight"><pre><span></span><code>    # mkdir bbxm-gdb
@@ -268,7 +343,6 @@ path the executable is in, so you have to specify the full path.</p>
     Breakpoint 10 at 0x80015dcc: file ../../../../../../rtems-src/c/src/../../cpukit/libcsupport/src/newlibc_exit.c, line 37.
     (gdb)
 </code></pre></div>
-
 <p>The executable is now ready to run but halted. Start with 'continue':</p>
 <div class="highlight"><pre><span></span><code>    (gdb) c
     Continuing.
@@ -277,16 +351,14 @@ path the executable is in, so you have to specify the full path.</p>
     37      {
     (gdb)
 </code></pre></div>
-
 <p>The gdb interface is very powerful as the loading &amp; running is convenient, full debug info is available,  breakpoints all work and the build &amp; run cycle is very short.</p>
-<h2>Running the full test suite over JTAG</h2>
+<h2 id="running-the-full-test-suite-over-jtag">Running the full test suite over JTAG</h2>
 <p>Doing the above in batch mode lets us run the full test suite on hardware, the only real test of course. We specify the beagleboardxm bsp insteadof the beagleboardxm_qemu bsp. This one will talk to gdb to load and run the executable each time.</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1"># cd $HOME/development/rtems/rtems-tools/tester</span>
 <span class="w">    </span><span class="c1"># ./rtems-test --log=bbxm-jtag.log --report-mode=all --rtems-bsp=beagleboardxm --rtems-tools=$HOME/development/rtems/4.12 $HOME/development/rtems/b-beagle/arm-rtems4.12/c/beagleboardxm</span>
 </code></pre></div>
-
 <p>That is it! Everything RTEMS on Beagle!</p>
-<h2>What I've Tested</h2>
+<h2 id="what-ive-tested">What I've Tested</h2>
 <p>I have personally tested everything in the above procedure, i.e.</p>
 <ol>
 <li>That building all the tools and utilities from scratch work, using the RTEMS Source Builder repository (Ubuntu + FreeBSD).</li>
@@ -298,7 +370,7 @@ path the executable is in, so you have to specify the full path.</p>
 <p>Additionally, I've also tested the work by Claas Ziemke rebased on
 current rtems mainline builds. My changes are in a separate commit in order
 to preserve credit where it's due.</p>
-<h2>What's next</h2>
+<h2 id="whats-next">What's next</h2>
 <p>Gee don't put me on the spot!</p>
 <p>I want to diagnose the failure reasons of the tests in the emulator and on
 hardware (different).</p>
@@ -309,51 +381,92 @@ extremely powerful setup - console, power and jtag all over one USB cable?
 God have mercy.</p>
 <p>When I'm feeling brave I'd like to get the ethernet hardware working on the
 Beaglebones. But first things first. Let me know if you enjoy the BSP!</p>
-        <hr class="divider-short"/>
-        <!-- Disqus goes here -->
-        <!-- <section>
-          <h1>Comments</h1>
-          <div id="disqus_thread" aria-live="polite">Disqus goes here</div>
-        </section>
-        -->
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/beagle.html">beagle</a>
+        </li>
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/beagleboard.html">beagleboard</a>
+        </li>
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/beaglebone.html">beaglebone</a>
+        </li>
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/rtems.html">rtems</a>
+        </li>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-l-lg">
+        <a class="flex flex-col pr-2" href="https://www.shrike-systems.com/minix-330-is-released-is-unforking-and-is-visiting-eurobsdcon-2014.html">
+          <div class="mx-4 py-2 text-left">
+            <p class="text-zinc-600 dark:text-zinc-300 text-sm">« PREV PAGE</p>
+            <p class="text-left py-1 hover:underline">Minix 3.3.0 is released, is unforking, and is visiting EuroBSDcon 2014</p>
+          </div>
+        </a>
+      </div>
+      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-r-lg ">
+        <a class="flex flex-col" href="https://www.shrike-systems.com/nice-solution-to-use-pc-as-a-sonos-audio-source.html">
+          <div class="text-right mx-4 py-2">
+            <p class="text-zinc-600 dark:text-zinc-300 text-sm">NEXT PAGE »</p>
+            <p class="text-right py-1 hover:underline">Nice solution to use PC as a Sonos audio source.</p>
+          </div>
+        </a>
       </div>
     </div>
+  </footer>
+  <div>
   </div>
-</article>
-    <footer id="footer" class="her-row">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-1">
-            <a href="/"><h4>Home</h4></a>
-          </div>
+</main>
 
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/pages/about-this-site.html"><h4>About</h4></a>
-          </div>
-
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/archives.html"><h4>Archives</h4></a>
-          </div>
-
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/tags.html"><h4>Tags</h4></a>
-          </div>
-
-          <div class="col-md-2">
-            <div class="social-icon-list">
-              <a href="https://twitter.com/bjg"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_31_twitter.png"/></a>
-
-              <a href="https://github.com/bengras"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_21_github.png"/></a>
-
-              <a href="https://linkedin.com/in/bengras"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_17_linked_in.png"/></a>
-
-            </div>
-          </div>
-          <div class="pull-right">
-            <h4>Powered by <a href="http://blog.getpelican.com/">Pelican</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
-          </div>
+    </div>
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-600 dark:text-zinc-400">
+        <div class="px-4">
+            <span>© Ben Gras&nbsp;&#8226;&nbsp;</span>Powered by
+            <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
+            <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
         </div>
-      </div>
     </footer>
-  </body>
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+</body>
+
 </html>

@@ -1,49 +1,140 @@
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Exciting RTEMS GSOC projects for beagle announced</title>
-  <meta name="author" content="Ben Gras">
-
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="description" content="Exciting RTEMS GSOC projects for beagle announced written June 03, 2015 in rtems,gsoc">
-
-  <link rel="canonical" href="https://www.shrike-systems.com/exciting-rtems-gsoc-projects-for-beagle-announced.html">
-
-  <link href="https://www.shrike-systems.com/favicon.png" rel="icon">
-
-  <link href="https://www.shrike-systems.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shrike Systems Full Atom Feed" />
-
-  <link href="https://www.shrike-systems.com/theme/css/screen.css"  media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="https://www.shrike-systems.com/theme/css/tomorrow.css"  media="screen, projection" rel="stylesheet" type="text/css" />
-
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="Shrike Systems Blog Posts">
+    <title>Exciting RTEMS GSOC projects for beagle announced</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+    <link rel="stylesheet" type="text/css" href="https://www.shrike-systems.com/theme/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.shrike-systems.com/theme/css/pygment.css" />
+    <link rel="shortcut icon" href="https://www.shrike-systems.com/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://www.shrike-systems.com/theme/css/stork.css">
+    <link rel="stylesheet" media="screen and (prefers-color-scheme: dark)"
+        href="https://www.shrike-systems.com/theme/css/stork-dark.css">
+    <link
+        href="https://www.shrike-systems.com/feeds/all.atom.xml"
+        type="application/atom+xml" rel="alternate" title="Shrike Systems Atom Feed" />
+<meta name="description" content="A new RTEMS project - GSOC 2015!" />
 </head>
-  <body>
-    <a href="/" class="home-icon">
-      <img src="https://www.shrike-systems.com/theme/images/home.png"/>
-    </a>
-<article role="article" class="full-single-article">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <h1>Exciting RTEMS GSOC projects for beagle announced</h1>
-        <div class="meta">
-          written <time datetime="2015-06-03T23:50:00+02:00">June 03, 2015</time>
-          in <span class="categories">
-            <a href="https://www.shrike-systems.com/tag/rtems.html">rtems</a>,            <a href="https://www.shrike-systems.com/tag/gsoc.html">gsoc</a>          </span>
+
+<body class="min-h-screen flex flex-col max-w-7xl lg:max-w-none text-zinc-800 bg-neutral-100 
+    dark:bg-neutral-900 dark:text-zinc-300 container mx-auto justify-center md:px-3 ">
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <nav class="sm:flex sm:justify-between xl:ml-32 pl-4 items-center">
+        <div class="flex pt-4">
+            <h1 class="font-semibold text-2xl"><a href="https://www.shrike-systems.com/">Shrike Systems</a></h1>
+            <button id="theme-toggle" type="button" aria-label="Light|Dark"
+                class="text-zinc-700 dark:text-zinc-400 rounded-full focus:outline-none text-sm ml-2 p-1">
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
         </div>
-        <p>Google Summer of Code 2015 has started. RTEMS is a participating
+        <ul class="flex flex-wrap lg:mr-24 md:pt-0">
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/pages/about-this-site.html">About</a></li>
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/archives.html">Archive</a></li>
+            <li class="mr-4 pt-6"><a                     href="https://www.shrike-systems.com/categories.html">Categories</a></li>
+            <li class="mr-4 pt-6"><a  href="https://www.shrike-systems.com/tags.html">Tags</a></li>
+        </ul>
+    </nav>
+    <div class="flex-grow md:max-w-screen-md md:mx-auto md:w-3/4 px-4">
+        <nav class="text-zinc-800 dark:text-zinc-300 mt-12 pb-2 md:mt-16" aria-label="Breadcrumb">
+            <ul class="p-0 inline-flex items-center">
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/" class="text-zinc-800 dark:text-zinc-300 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                            </path>
+                        </svg>
+                        Home
+                    </a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/categories.html">Categories</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="https://www.shrike-systems.com/category/blog.html">Blog</a>
+                    <svg class="fill-current w-3 h-3 mr-2 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path
+                            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                    </svg>
+                </li>
+            </ul>
+        </nav>
+
+<main>
+  <header>
+    <h1 class="font-semibold text-3xl my-2">Exciting RTEMS GSOC projects for beagle announced</h1>
+    <footer class="flex text-sm text-zinc-800 dark:text-zinc-400">
+      <div class="flex text-xs text-zinc-800 dark:text-zinc-400">
+        <time>June 03, 2015</time>
+        <div>
+          <span>&nbsp;·&nbsp;3 min read</span>
+        </div>
+        <div>
+          <span>&nbsp;·&nbsp;Ben Gras</span>
+        </div>
+      </div>
+    </footer>
+  </header>
+  <details class="flex flex-col my-6 p-4 bg-zinc-200 dark:bg-zinc-800 rounded-lg">
+    <summary class="text-lg font-bold">Table of contents</summary>
+    <div class="mx-4 px-4 underline">
+      <div id="toc"><ul><li><a class="toc-href" href="#google-summer-of-code-projects" title="Google Summer of Code Projects">Google Summer of Code Projects</a></li><li><a class="toc-href" href="#coding-has-started" title="Coding has started">Coding has started</a></li><li><a class="toc-href" href="#i-am-mentoring" title="I am mentoring">I am mentoring</a></li><li><a class="toc-href" href="#beagleboardorg-is-generously-donating" title="Beagleboard.org is generously donating">Beagleboard.org is generously donating</a></li><li><a class="toc-href" href="#beagle-peripheral-improvement-by-ketul-shah" title="Beagle peripheral improvement by Ketul Shah">Beagle peripheral improvement by Ketul Shah</a></li><li><a class="toc-href" href="#bsd-licensed-bootloader-by-jarielle-catbagan" title="BSD-licensed bootloader by Jarielle Catbagan">BSD-licensed bootloader by Jarielle Catbagan</a></li><li><a class="toc-href" href="#big-changes" title="Big changes">Big changes</a></li></ul></div>
+    </div>
+  </details>
+  <div class="max-w-7xl container mx-auto my-8 text-zinc-800 dark:text-zinc-300  
+              prose lg:max-w-none prose-headings:text-zinc-800 prose-headings:dark:text-zinc-300 
+              prose-h1:text-3xl lg:prose-h1:text-3xl prose-headings:font-semibold 
+              prose-pre:bg-zinc-200 prose-pre:text-zinc-800
+              dark:prose-pre:bg-zinc-800 dark:prose-pre:text-zinc-200
+              prose-blockquote:text-zinc-800
+              dark:prose-blockquote:text-zinc-200
+              prose-a:text-slate-600 prose-a:font-normal
+              dark:prose-a:text-slate-400
+              dark:prose-strong:text-zinc-200 
+              dark:prose-code:text-zinc-200
+              dark:prose-code:bg-zinc-800
+              prose-code:bg-zinc-200
+              prose-code:font-light
+              prose-img:rounded-md
+              sm:text-left md:text-justify
+              ">
+    <p>Google Summer of Code 2015 has started. RTEMS is a participating
 organisation, and the set of accepted proposals was just announced
 some time ago. And it's a big deal. Not in the least for the RTEMS
 Beagle support!</p>
-<h1>Google Summer of Code Projects</h1>
+<h1 id="google-summer-of-code-projects">Google Summer of Code Projects</h1>
 <p>Google Summer of Code is a Google-sponsored program intended to get
 people into the world of open source. Google pays a stipend to let
 a student work on an open source project in the summer holidays.
@@ -57,16 +148,16 @@ guidance of a org-appointed mentor. The mentor knows the org and
 the project well enough to guide the students through this process.
 Hopefully, the students will stay and continue to contribute to the
 project after GSOC is over.</p>
-<h1>Coding has started</h1>
+<h1 id="coding-has-started">Coding has started</h1>
 <p>As the GSOC 2015 Timeline shows, coding has started. At RTEMS we
 have weekly IRC meetings with students &amp; mentors at which students
 present their progress, sticking points, and plans for the next
 week.</p>
-<h1>I am mentoring</h1>
+<h1 id="i-am-mentoring">I am mentoring</h1>
 <p>I am co-mentoring 3 projects. And I'm very excited about their
 potential. A full table of projects is in the tracking table on the
 RTEMS GSOC page.</p>
-<h1>Beagleboard.org is generously donating</h1>
+<h1 id="beagleboardorg-is-generously-donating">Beagleboard.org is generously donating</h1>
 <p>Jason Kridner of Beagleboard.org has contacted us and stated that
 Beagleboard.org will donate a Beaglebone Black to students working
 on Beaglebone projects for GSOC, even for non-Beagleboard org GSOC
@@ -74,7 +165,7 @@ projects. He has shipped all 3 students working on the RTEMS Beagle
 BSP a Beaglebone Black. Fantastic initiative! We're grateful to
 Beagleboard for this contribution and I hope it will benefit the
 students greatly, in their GSOC project and afterwards.</p>
-<h1>Beagle peripheral improvement by Ketul Shah</h1>
+<h1 id="beagle-peripheral-improvement-by-ketul-shah">Beagle peripheral improvement by Ketul Shah</h1>
 <p>Ketul is going to be improving peripheral support for the Beagle
 BSP. He already has a lot of GPIO functionality working and we are
 working on making a nice clean GPIO API that is sufficiently general
@@ -88,7 +179,7 @@ working for the Beaglebones. He will be using the FreeBSD code and
 RTEMS' libbsd to build it. He already has it building and interfacing
 to the hardware to a great extent, very impressive rate of progress!
 Ethernet functionality will really help the BSP grow up tremendously.</p>
-<h1>BSD-licensed bootloader by Jarielle Catbagan</h1>
+<h1 id="bsd-licensed-bootloader-by-jarielle-catbagan">BSD-licensed bootloader by Jarielle Catbagan</h1>
 <p>Jarielle is working on a BSD (or similarly liberal) licensed
 bootloader for the Beagle BSP. Currently booting an RTEMS image for
 the Beagles relies on uboot which is GPL-licensed. Unfortunately
@@ -103,57 +194,90 @@ and rtems source builder repositories) aren't fully merged yet with
 mainline. A significant side-effect of this project is hopefully
 to provide a full boot without uboot and merge the result with rtems
 tools and rtems source builder.</p>
-<h1>Big changes</h1>
+<h1 id="big-changes">Big changes</h1>
 <p>All of these projects together will bring about a big improvement
 to the Beagle BSP on RTEMS. The Beagle BSP has attracted quite some
 attention to RTEMS which is great. Making it more fully featured
 and within just a few months is just fantastic. I'm thrilled to be
 a part of it.</p>
-        <hr class="divider-short"/>
-        <!-- Disqus goes here -->
-        <!-- <section>
-          <h1>Comments</h1>
-          <div id="disqus_thread" aria-live="polite">Disqus goes here</div>
-        </section>
-        -->
+    <!-- <div class="aspect-w-16 aspect-h-9 mx-auto"></div> CSS placeholder -->
+  </div>
+  <footer class="flex flex-col mt-10 ">
+    <ul class="flex flex-wrap">
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/gsoc.html">gsoc</a>
+        </li>
+        <li
+          class="bg-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-800 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 mb-2 mr-2 px-3 py-1.5 rounded-md transition ease-in active:-translate-y-1 active:scale-110 duration-75">
+          <a href="https://www.shrike-systems.com/tag/rtems.html">rtems</a>
+        </li>
+    </ul>
+    <div class="flex w-full my-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg">
+      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-l-lg">
+        <a class="flex flex-col pr-2" href="https://www.shrike-systems.com/bandroid-how-google-killed-two-factor-authentication.html">
+          <div class="mx-4 py-2 text-left">
+            <p class="text-zinc-600 dark:text-zinc-300 text-sm">« PREV PAGE</p>
+            <p class="text-left py-1 hover:underline">BAndroid: How Google killed two-factor authentication</p>
+          </div>
+        </a>
+      </div>
+      <div class="w-1/2 hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-r-lg ">
+        <a class="flex flex-col" href="https://www.shrike-systems.com/minix-330-is-released-is-unforking-and-is-visiting-eurobsdcon-2014.html">
+          <div class="text-right mx-4 py-2">
+            <p class="text-zinc-600 dark:text-zinc-300 text-sm">NEXT PAGE »</p>
+            <p class="text-right py-1 hover:underline">Minix 3.3.0 is released, is unforking, and is visiting EuroBSDcon 2014</p>
+          </div>
+        </a>
       </div>
     </div>
+  </footer>
+  <div>
   </div>
-</article>
-    <footer id="footer" class="her-row">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-1">
-            <a href="/"><h4>Home</h4></a>
-          </div>
+</main>
 
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/pages/about-this-site.html"><h4>About</h4></a>
-          </div>
-
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/archives.html"><h4>Archives</h4></a>
-          </div>
-
-          <div class="col-md-1">
-            <a href="https://www.shrike-systems.com/tags.html"><h4>Tags</h4></a>
-          </div>
-
-          <div class="col-md-2">
-            <div class="social-icon-list">
-              <a href="https://twitter.com/bjg"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_31_twitter.png"/></a>
-
-              <a href="https://github.com/bengras"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_21_github.png"/></a>
-
-              <a href="https://linkedin.com/in/bengras"><img src="https://www.shrike-systems.com/theme/images/glyphicons_social_17_linked_in.png"/></a>
-
-            </div>
-          </div>
-          <div class="pull-right">
-            <h4>Powered by <a href="http://blog.getpelican.com/">Pelican</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
-          </div>
+    </div>
+    <footer class="flex w-full text-xs justify-center mt-10 mb-6 text-zinc-600 dark:text-zinc-400">
+        <div class="px-4">
+            <span>© Ben Gras&nbsp;&#8226;&nbsp;</span>Powered by
+            <a class="underline" href="https://getpelican.com/">Pelican</a>&nbsp;&
+            <a class="underline" href="https://github.com/aleylara/Papyrus">Papyrus</a>
         </div>
-      </div>
     </footer>
-  </body>
+
+
+    <script>
+        let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+        let themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function () {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+</body>
+
 </html>
